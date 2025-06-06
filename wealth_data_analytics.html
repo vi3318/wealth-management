@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Management Technology Landscape - Grid View</title>
+    <style>
+        :root {
+            --firm-bg: #1e40af;
+            --firm-color: white;
+            --platform-bg: #dbeafe;
+            --platform-color: #1e40af;
+            --platform-border: #bfdbfe;
+            --text-main: #333;
+            --bg-light: #f7f9fc;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --animation-stagger-firm: 0.15s; /* Slightly faster stagger for grid */
+            --animation-stagger-platform: 0.1s;
+            --connector-draw-duration: 0.3s;
+            --platform-appear-duration: 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .chart-main-container {
+            width: 100%;
+            max-width: 1200px; /* Wider max-width for grid layout */
+        }
+
+        .main-heading {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--firm-bg);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInSlideUp 0.6s ease-out 0.2s forwards;
+        }
+
+        /* Grid layout for firm cards */
+        .chart-grid {
+            display: grid;
+            /* Responsive grid: creates as many columns as fit with a min width of 320px */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem; /* Space between cards */
+        }
+
+        .firm-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--card-shadow);
+            /* Removed margin-bottom as gap handles spacing */
+            padding: 1.5rem; /* Slightly adjusted padding for compact cards */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInSlideUp var(--animation-stagger-firm) ease-out forwards;
+            animation-delay: calc(0.5s + var(--animation-order) * var(--animation-stagger-firm));
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            display: flex; /* Added for consistent height if content varies slightly, or use grid for internal alignment */
+            flex-direction: column;
+        }
+
+        .firm-card:hover {
+            transform: translateY(-5px) scale(1.02); /* Adjusted hover for grid */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .firm-title {
+            background-color: var(--firm-bg);
+            color: var(--firm-color);
+            font-size: 1.15rem; /* Slightly smaller for compact card */
+            font-weight: bold;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: inline-block;
+            align-self: flex-start; /* Align title to the start if card is flex */
+            opacity: 0;
+            transform: translateX(-15px);
+            animation: fadeInSlideLeft 0.4s ease-out forwards;
+            animation-delay: calc(0.5s + (var(--animation-order) * var(--animation-stagger-firm)) + 0.2s);
+        }
+
+        .platforms-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: auto; /* Pushes list to bottom if card is flex container and title is shorter */
+        }
+
+        .platform-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.7rem; /* Slightly reduced margin */
+            padding: 0.4rem 0;
+            opacity: 0;
+            animation: fadeInPlatformItem var(--platform-appear-duration) ease-out forwards;
+            animation-delay: calc(0.5s + (var(--animation-order) * var(--animation-stagger-firm)) + 0.4s + (var(--sub-order) * var(--animation-stagger-platform)) );
+        }
+        .platform-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .platform-connector {
+            width: 0;
+            height: 2.5px; /* Slightly thinner */
+            background-color: var(--platform-border);
+            margin-right: 10px; /* Slightly reduced margin */
+            border-radius: 2px;
+            animation: drawConnector var(--connector-draw-duration) ease-out forwards;
+            animation-delay: calc(0.5s + (var(--animation-order) * var(--animation-stagger-firm)) + 0.4s + (var(--sub-order) * var(--animation-stagger-platform)) );
+        }
+
+        .platform-name {
+            background-color: var(--platform-bg);
+            color: var(--platform-color);
+            font-weight: bold;
+            padding: 0.4rem 0.7rem; /* Slightly reduced padding */
+            border-radius: 4px;
+            border: 1px solid var(--platform-border);
+            font-size: 0.9rem; /* Slightly smaller font */
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: fadeInSlideLeft var(--platform-appear-duration) ease-out forwards;
+            animation-delay: calc(0.5s + (var(--animation-order) * var(--animation-stagger-firm)) + 0.4s + (var(--sub-order) * var(--animation-stagger-platform)) + (var(--connector-draw-duration) * 0.5) );
+        }
+
+        /* Animations (largely the same) */
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInSlideLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInPlatformItem {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawConnector {
+            to {
+                width: 20px; /* Slightly shorter connector for compact cards */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="chart-main-container">
+        <h1 class="main-heading">Wealth Management Firm Technology Platforms</h1>
+
+        <div class="chart-grid"> <div class="firm-card" style="--animation-order: 1;">
+                <h2 class="firm-title">HDFC Bank WM</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">BlackRock Aladdin</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Refinitiv Eikon</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Salesforce FSC</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="firm-card" style="--animation-order: 2;">
+                <h2 class="firm-title">ICICI WM</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Charles River IMS</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Bloomberg Terminal</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Microsoft Dynamics</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="firm-card" style="--animation-order: 3;">
+                <h2 class="firm-title">Kotak WM</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Temenos WealthSuite</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">FactSet</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Salesforce FSC</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="firm-card" style="--animation-order: 4;">
+                <h2 class="firm-title">Axis Burgundy</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">BlackRock Aladdin</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Bloomberg PORT</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Avaloq</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="firm-card" style="--animation-order: 5;">
+                <h2 class="firm-title">SBI Wealth</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Charles River IMS</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Morningstar Direct</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Microsoft Dynamics</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="firm-card" style="--animation-order: 6;">
+                <h2 class="firm-title">Aditya Birla Capital</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Temenos WealthSuite</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">MSCI Analytics</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Salesforce FSC</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="firm-card" style="--animation-order: 7;">
+                <h2 class="firm-title">Standard Chartered WM</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Avaloq</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Bloomberg Terminal</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">FactSet</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="firm-card" style="--animation-order: 8;">
+                <h2 class="firm-title">Anand Rathi WM</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Charles River IMS</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Refinitiv Eikon</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Microsoft Dynamics</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="firm-card" style="--animation-order: 9;">
+                <h2 class="firm-title">Bajaj Capital Wealth</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Temenos WealthSuite</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Morningstar Direct</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Salesforce FSC</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="firm-card" style="--animation-order: 10;">
+                <h2 class="firm-title">Edelweiss Wealth</h2>
+                <ul class="platforms-list">
+                    <li class="platform-item" style="--sub-order: 1;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">BlackRock Aladdin</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 2;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">MSCI Analytics</span>
+                    </li>
+                    <li class="platform-item" style="--sub-order: 3;">
+                        <span class="platform-connector"></span>
+                        <span class="platform-name">Avaloq</span>
+                    </li>
+                </ul>
+            </div>
+        </div> </div> </body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Generation Technology Stacks in Wealth Management</title>
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-accent: #eef2ff;
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --text-dark: #111827;
+            --text-medium: #374151;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+
+            --animation-stagger-1: 0.2s;
+            --animation-stagger-2: 0.15s;
+            --animation-stagger-3: 0.1s;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            padding: 2.5rem;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 0.2s forwards;
+        }
+
+        .main-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInSlideUp 0.6s ease-out 0.4s forwards;
+        }
+
+        .sub-heading {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInSlideUp 0.6s ease-out 0.6s forwards;
+        }
+
+        .ecosystem-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: center;
+        }
+
+        .wm-section {
+            flex: 1;
+            min-width: 340px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.6s ease-out forwards;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--secondary-blue);
+        }
+
+        .firm-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            /* Staggering set via inline styles */
+        }
+
+        .firm-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .firm-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .platforms-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .platform-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-medium);
+            padding: 0.6rem 0;
+            opacity: 0;
+            transform: translateX(-15px);
+            animation: slideInFromLeft 0.5s ease-out forwards;
+            /* Staggering set via inline styles */
+        }
+        
+        .platform-item:not(:last-child) {
+            border-bottom: 1px dashed #e0e7ff;
+        }
+
+        .platform-item .icon {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            margin-right: 12px;
+            color: var(--secondary-blue);
+        }
+
+        /* Animations */
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes fadeInSlideUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { to { opacity: 1; transform: scale(1); } }
+        @keyframes slideInFromLeft { to { opacity: 1; transform: translateX(0); } }
+
+        /* Responsive */
+        @media(max-width: 900px) {
+            .ecosystem-layout {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .wm-section {
+                margin-bottom: 2rem;
+            }
+        }
+        @media(max-width: 500px) {
+            body { padding: 1.5rem; }
+            .main-heading { font-size: 2rem; }
+            .sub-heading { font-size: 1rem; }
+            .section-title { font-size: 1.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h1 class="main-heading">Lead Generation Technology Stacks</h1>
+        <p class="sub-heading">A professional overview of key software and platforms used by leading Indian Wealth Management firms for client acquisition and prospecting.</p>
+
+        <div class="ecosystem-layout">
+            <!-- Bank-Led Wealth Management Column -->
+            <section class="wm-section" style="animation-delay: 0.8s;">
+                <h2 class="section-title">Bank-Led Wealth Management</h2>
+
+                <!-- HDFC Bank WM -->
+                <div class="firm-card" style="animation-delay: calc(0.8s + var(--animation-stagger-2) * 1);">
+                    <h3 class="firm-title">HDFC Bank WM</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.0s + var(--animation-stagger-3) * 1);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75l.93-1.6c.14-.24.28-.47.44-.7.39-.58.82-1.12 1.3-1.62.47-.5.98-.97 1.52-1.42l.53-.45c.14-.12.29-.23.44-.34.5-.38 1.03-.73 1.59-.99.39-.18.79-.34 1.2-.48l.58-.2a14.07,14.07,0,014.2,0l.58.2c.4.14.8.3,1.2.48.56.26,1.08.6,1.59.99.15.11.3.22.44.34l.53.45c.54-.45,1.05-.92,1.52,1.42.48.5,0.9,1.04,1.3,1.62.16.23.3.46.44.7l.93,1.6c.43,0.75,0.43,1.65,0,2.4l-.93,1.6c-.14.24-.28.47-.44-.7-.39.58-.82-1.12-1.3-1.62-.47.5-.98-.97-1.52-1.42l-.53-.45c-.14-.12-.29-.23-.44-.34-.5-.38-1.03-.73-1.59-.99-.39-.18-.79-.34-1.2-.48l-.58-.2a14.07,14.07,0,01-4.2,0l-.58-.2c-.4-.14-.8-.3-1.2-.48-.56-.26-1.08-.6-1.59-.99-.15-.11-.3-.22-.44-.34l-.53-.45c-.54-.45-1.05-.92-1.52-1.42-.48-.5-.9-1.04-1.3-1.62-.16-.23-.3-.46-.44-.7l-.93-1.6c-.43-.75-.43-1.65,0-2.4z"></path></svg>
+                            Salesforce Sales Cloud
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.0s + var(--animation-stagger-3) * 2);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 100 15 7.5 7.5 0 000-15zM21 21l-5.197-5.197"></path></svg>
+                            Adobe Analytics
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.0s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.96a3 3 0 00-4.682 2.72 9.094 9.094 0 003.741.479m-4.5-4.5a3 3 0 00-3.742 2.72 9.093 9.093 0 003.742.479M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            LinkedIn Sales Navigator
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ICICI WM -->
+                <div class="firm-card" style="animation-delay: calc(0.8s + var(--animation-stagger-2) * 2);">
+                     <h3 class="firm-title">ICICI Wealth Management</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.15s + var(--animation-stagger-3) * 1);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75l.93-1.6c.14-.24.28-.47.44-.7.39-.58.82-1.12 1.3-1.62.47-.5.98-.97 1.52-1.42l.53-.45c.14-.12.29-.23.44-.34.5-.38 1.03-.73 1.59-.99.39-.18.79-.34 1.2-.48l.58-.2a14.07,14.07,0,014.2,0l.58.2c.4.14.8.3,1.2.48.56.26,1.08.6,1.59.99.15.11.3.22.44.34l.53.45c.54-.45,1.05-.92,1.52,1.42.48.5,0.9,1.04,1.3,1.62.16.23.3.46.44.7l.93,1.6c.43,0.75,0.43,1.65,0,2.4l-.93,1.6c-.14.24-.28.47-.44-.7-.39-.58-.82-1.12-1.3-1.62-.47.5-.98-.97-1.52-1.42l-.53-.45c-.14-.12-.29-.23-.44-.34-.5-.38-1.03-.73-1.59-.99-.39-.18-.79-.34-1.2-.48l-.58-.2a14.07,14.07,0,01-4.2,0l-.58-.2c-.4-.14-.8-.3-1.2-.48-.56-.26-1.08-.6-1.59-.99-.15-.11-.3-.22-.44-.34l-.53-.45c-.54-.45-1.05-.92-1.52-1.42-.48-.5-.9-1.04-1.3-1.62-.16-.23-.3-.46-.44-.7l-.93-1.6c-.43-.75-.43-1.65,0-2.4z"></path></svg>
+                           Oracle Siebel CRM
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.15s + var(--animation-stagger-3) * 2);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0112 13.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253M12 21a9.004 9.004 0 008.716-6.747"></path></svg>
+                           ICICIdirect.com
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(1.15s + var(--animation-stagger-3) * 3);">
+                           <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                           Proprietary Referral Systems
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Kotak WM -->
+                <div class="firm-card" style="animation-delay: calc(0.8s + var(--animation-stagger-2) * 3);">
+                    <h3 class="firm-title">Kotak Wealth Management</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.3s + var(--animation-stagger-3) * 1);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75l.93-1.6c.14-.24.28-.47.44-.7.39-.58.82-1.12 1.3-1.62.47-.5.98-.97 1.52-1.42l.53-.45c.14-.12.29-.23.44-.34.5-.38 1.03-.73 1.59-.99.39-.18.79-.34 1.2-.48l.58-.2a14.07,14.07,0,014.2,0l.58.2c.4.14.8.3,1.2.48.56.26,1.08.6,1.59.99.15.11.3.22.44.34l.53.45c.54-.45,1.05-.92,1.52,1.42.48.5,0.9,1.04,1.3,1.62.16.23.3.46.44.7l.93,1.6c.43,0.75,0.43,1.65,0,2.4l-.93,1.6c-.14.24-.28.47-.44-.7-.39-.58-.82-1.12-1.3-1.62-.47.5-.98-.97-1.52-1.42l-.53-.45c-.14-.12-.29-.23-.44-.34-.5-.38-1.03-.73-1.59-.99-.39-.18-.79-.34-1.2-.48l-.58-.2a14.07,14.07,0,01-4.2,0l-.58-.2c-.4-.14-.8-.3-1.2-.48-.56-.26-1.08-.6-1.59-.99-.15-.11-.3-.22-.44-.34l-.53-.45c-.54-.45-1.05-.92-1.52-1.42-.48-.5-.9-1.04-1.3-1.62-.16-.23-.3-.46-.44-.7l-.93-1.6c-.43-.75-.43-1.65,0-2.4z"></path></svg>
+                           Salesforce FSC
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.3s + var(--animation-stagger-3) * 2);">
+                           <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M21.75 9V5.25A2.25 2.25 0 0019.5 3h-15a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 004.5 21h15a2.25 2.25 0 002.25-2.25V15m-4.5-6.75l-6.478 3.488m11.218-3.488l-6.478 3.488m-7.5-3.488l6.478 3.488"></path></svg>
+                           Salesforce Marketing Cloud
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(1.3s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"></path></svg>
+                            Kotak Cherry App
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Axis Bank Burgundy -->
+                <div class="firm-card" style="animation-delay: calc(0.8s + var(--animation-stagger-2) * 4);">
+                    <h3 class="firm-title">Axis Bank Burgundy</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.45s + var(--animation-stagger-3) * 1);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75l.93-1.6c.14-.24.28-.47.44-.7.39-.58.82-1.12 1.3-1.62.47-.5.98-.97 1.52-1.42l.53-.45c.14-.12.29-.23.44-.34.5-.38 1.03-.73 1.59-.99.39-.18.79-.34 1.2-.48l.58-.2a14.07,14.07,0,014.2,0l.58.2c.4.14.8.3,1.2.48.56.26,1.08.6,1.59.99.15.11.3.22.44.34l.53.45c.54-.45,1.05-.92,1.52,1.42.48.5,0.9,1.04,1.3,1.62.16.23.3.46.44.7l.93,1.6c.43,0.75,0.43,1.65,0,2.4l-.93,1.6c-.14.24-.28.47-.44-.7-.39-.58-.82-1.12-1.3-1.62-.47.5-.98-.97-1.52-1.42l-.53-.45c-.14-.12-.29-.23-.44-.34-.5-.38-1.03-.73-1.59-.99-.39-.18-.79-.34-1.2-.48l-.58-.2a14.07,14.07,0,01-4.2,0l-.58-.2c-.4-.14-.8-.3-1.2-.48-.56-.26-1.08-.6-1.59-.99-.15-.11-.3-.22-.44-.34l-.53-.45c-.54-.45-1.05-.92-1.52-1.42-.48-.5-.9-1.04-1.3-1.62-.16-.23-.3-.46-.44-.7l-.93-1.6c-.43-.75-.43-1.65,0-2.4z"></path></svg>
+                            Salesforce Sales Cloud
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.45s + var(--animation-stagger-3) * 2);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m3 0h3m-3 2.25l3 2.25-3 2.25M6.75 12h3m-3 5.25h3m-3-10.5h3m-3-2.25h3m-3 15h3m-3-4.5h3m12-15h-3.375a48.87 48.87 0 00-3.03 0h-3.375a48.87 48.87 0 00-3.03 0H3.375a1.125 1.125 0 00-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-17.25c0-.621-.504-1.125-1.125-1.125z"></path></svg>
+                            ON24 (for Webinars)
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.45s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.96a3 3 0 00-4.682 2.72 9.094 9.094 0 003.741.479m-4.5-4.5a3 3 0 00-3.742 2.72 9.093 9.093 0 003.742.479M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            LinkedIn Sales Navigator
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- SBI Wealth -->
+                <div class="firm-card" style="animation-delay: calc(0.8s + var(--animation-stagger-2) * 5);">
+                    <h3 class="firm-title">SBI Wealth</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.6s + var(--animation-stagger-3) * 1);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"></path></svg>
+                            SBI YONO Platform
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.6s + var(--animation-stagger-3) * 2);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h6M9 11.25h6M9 15.75h6"></path></svg>
+                            TCS BaNCS (Core System)
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.6s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Proprietary RM & Referral Tools
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Standard Chartered WM -->
+                <div class="firm-card" style="animation-delay: calc(0.8s + var(--animation-stagger-2) * 6);">
+                    <h3 class="firm-title">Standard Chartered WM</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.75s + var(--animation-stagger-3) * 1);">
+                           <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75l.93-1.6c.14-.24.28-.47.44-.7.39-.58.82-1.12 1.3-1.62.47-.5.98-.97 1.52-1.42l.53-.45c.14-.12.29-.23.44-.34.5-.38 1.03-.73 1.59-.99.39-.18.79-.34 1.2-.48l.58-.2a14.07,14.07,0,014.2,0l.58.2c.4.14.8.3,1.2.48.56.26,1.08.6,1.59.99.15.11.3.22.44.34l.53.45c.54-.45,1.05-.92,1.52,1.42.48.5,0.9,1.04,1.3,1.62.16.23.3.46.44.7l.93,1.6c.43,0.75,0.43,1.65,0,2.4l-.93,1.6c-.14.24-.28.47-.44-.7-.39-.58-.82-1.12-1.3-1.62-.47.5-.98-.97-1.52-1.42l-.53-.45c-.14-.12-.29-.23-.44-.34-.5-.38-1.03-.73-1.59-.99-.39-.18-.79-.34-1.2-.48l-.58-.2a14.07,14.07,0,01-4.2,0l-.58-.2c-.4-.14-.8-.3-1.2-.48-.56-.26-1.08-.6-1.59-.99-.15-.11-.3-.22-.44-.34l-.53-.45c-.54-.45-1.05-.92-1.52-1.42-.48-.5-.9-1.04-1.3-1.62-.16-.23-.3-.46-.44-.7l-.93-1.6c-.43-.75-.43-1.65,0-2.4z"></path></svg>
+                            Salesforce Sales Cloud
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.75s + var(--animation-stagger-3) * 2);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3.75 3.75L6.75 12m3 3.75L6.75 12m3-3.75L6.75 6m3 3.75L6.75 6m12 6.75l-3-3.75-3 3.75m3-3.75L15 6m3 3.75L15 6m3 6.75l3 3.75-3 3.75m-3-3.75L15 18m-3-3.75L15 18m-3-3.75L15 12m-3 3.75L15 12"></path></svg>
+                            Refinitiv World-Check
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.75s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.96a3 3 0 00-4.682 2.72 9.094 9.094 0 003.741.479m-4.5-4.5a3 3 0 00-3.742 2.72 9.093 9.093 0 003.742.479M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            LinkedIn Sales Navigator
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <!-- Independent Wealth Management Column -->
+            <section class="wm-section" style="animation-delay: 1.0s;">
+                <h2 class="section-title">Independent Wealth Management</h2>
+
+                <!-- Aditya Birla -->
+                 <div class="firm-card" style="animation-delay: calc(1.0s + var(--animation-stagger-2) * 1);">
+                    <h3 class="firm-title">Aditya Birla Capital</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.25s + var(--animation-stagger-3) * 1);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75l.93-1.6c.14-.24.28-.47.44-.7.39-.58.82-1.12 1.3-1.62.47-.5.98-.97 1.52-1.42l.53-.45c.14-.12.29-.23.44-.34.5-.38 1.03-.73 1.59-.99.39-.18.79-.34 1.2-.48l.58-.2a14.07,14.07,0,014.2,0l.58.2c.4.14.8.3,1.2.48.56.26,1.08.6,1.59.99.15.11.3.22.44.34l.53.45c.54-.45,1.05-.92,1.52,1.42.48.5,0.9,1.04,1.3,1.62.16.23.3.46.44.7l.93,1.6c.43,0.75,0.43,1.65,0,2.4l-.93,1.6c-.14.24-.28.47-.44-.7-.39-.58-.82-1.12-1.3-1.62-.47.5-.98-.97-1.52-1.42l-.53-.45c-.14-.12-.29-.23-.44-.34-.5-.38-1.03-.73-1.59-.99-.39-.18-.79-.34-1.2-.48l-.58-.2a14.07,14.07,0,01-4.2,0l-.58-.2c-.4-.14-.8-.3-1.2-.48-.56-.26-1.08-.6-1.59-.99-.15-.11-.3-.22-.44-.34l-.53-.45c-.54-.45-1.05-.92-1.52-1.42-.48-.5-.9-1.04-1.3-1.62-.16-.23-.3-.46-.44-.7l-.93-1.6c-.43-.75-.43-1.65,0-2.4z"></path></svg>
+                           Salesforce Sales Cloud
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.25s + var(--animation-stagger-3) * 2);">
+                           <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M21.75 9V5.25A2.25 2.25 0 0019.5 3h-15a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 004.5 21h15a2.25 2.25 0 002.25-2.25V15m-4.5-6.75l-6.478 3.488m11.218-3.488l-6.478 3.488m-7.5-3.488l6.478 3.488"></path></svg>
+                           Adobe Experience Cloud
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(1.25s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m3 0h3m-3 2.25l3 2.25-3 2.25M6.75 12h3m-3 5.25h3m-3-10.5h3m-3-2.25h3m-3 15h3m-3-4.5h3m12-15h-3.375a48.87 48.87 0 00-3.03 0h-3.375a48.87 48.87 0 00-3.03 0H3.375a1.125 1.125 0 00-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-17.25c0-.621-.504-1.125-1.125-1.125z"></path></svg>
+                           Zoom Webinars
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Anand Rathi -->
+                <div class="firm-card" style="animation-delay: calc(1.0s + var(--animation-stagger-2) * 2);">
+                     <h3 class="firm-title">Anand Rathi Wealth</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.4s + var(--animation-stagger-3) * 1);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                           Proprietary Advisor CRM
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.4s + var(--animation-stagger-3) * 2);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"></path></svg>
+                           AR Wealth App
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(1.4s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.96a3 3 0 00-4.682 2.72 9.094 9.094 0 003.741.479m-4.5-4.5a3 3 0 00-3.742 2.72 9.093 9.093 0 003.742.479M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                           LinkedIn Sales Navigator
+                        </li>
+                    </ul>
+                </div>
+                
+                 <!-- Bajaj Capital -->
+                <div class="firm-card" style="animation-delay: calc(1.0s + var(--animation-stagger-2) * 3);">
+                    <h3 class="firm-title">Bajaj Capital</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.55s + var(--animation-stagger-3) * 1);">
+                           <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1.125-1.5M10.875 15L12 13.875m0 0L13.125 15m-1.125-1.125V12m0 1.5V15m0 0l-1.125 1.5M15 9.75l-1.125-1.5M15 9.75L16.125 15m-1.125-5.25V12m0 1.5V15m0 0l-1.125 1.5M7.875 15l-1.125-1.5M7.875 15L9 13.875m0 0L10.125 15m-1.125-1.125V12m0 1.5V15m0 0l-1.125 1.5"></path></svg>
+                           LeadSquared (CRM)
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.55s + var(--animation-stagger-3) * 2);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M21.75 9V5.25A2.25 2.25 0 0019.5 3h-15a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 004.5 21h15a2.25 2.25 0 002.25-2.25V15m-4.5-6.75l-6.478 3.488m11.218-3.488l-6.478 3.488m-7.5-3.488l6.478 3.488"></path></svg>
+                           HubSpot (Content Marketing)
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(1.55s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                           Proprietary Financial Planning Tools
+                        </li>
+                    </ul>
+                </div>
+                
+                 <!-- Edelweiss WM (Nuvama) -->
+                <div class="firm-card" style="animation-delay: calc(1.0s + var(--animation-stagger-2) * 4);">
+                    <h3 class="firm-title">Edelweiss WM (Nuvama)</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(1.7s + var(--animation-stagger-3) * 1);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75l.93-1.6c.14-.24.28-.47.44-.7.39-.58.82-1.12 1.3-1.62.47-.5.98-.97 1.52-1.42l.53-.45c.14-.12.29-.23.44-.34.5-.38 1.03-.73 1.59-.99.39-.18.79-.34 1.2-.48l.58-.2a14.07,14.07,0,014.2,0l.58.2c.4.14.8.3,1.2.48.56.26,1.08.6,1.59.99.15.11.3.22.44.34l.53.45c.54-.45,1.05-.92,1.52,1.42.48.5,0.9,1.04,1.3,1.62.16.23.3.46.44.7l.93,1.6c.43,0.75,0.43,1.65,0,2.4l-.93,1.6c-.14.24-.28.47-.44-.7-.39-.58-.82-1.12-1.3-1.62-.47.5-.98-.97-1.52-1.42l-.53-.45c-.14-.12-.29-.23-.44-.34-.5-.38-1.03-.73-1.59-.99-.39-.18-.79-.34-1.2-.48l-.58-.2a14.07,14.07,0,01-4.2,0l-.58-.2c-.4-.14-.8-.3-1.2-.48-.56-.26-1.08-.6-1.59-.99-.15-.11-.3-.22-.44-.34l-.53-.45c-.54-.45-1.05-.92-1.52-1.42-.48-.5-.9-1.04-1.3-1.62-.16-.23-.3-.46-.44-.7l-.93-1.6c-.43-.75-.43-1.65,0-2.4z"></path></svg>
+                            Salesforce Sales Cloud
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.7s + var(--animation-stagger-3) * 2);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"></path></svg>
+                            Nuvama Markets App
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(1.7s + var(--animation-stagger-3) * 3);">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
+                            Preqin (Data Prospecting)
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Management Servicing Technology Ecosystem</title>
+    <style>
+        :root {
+            --firm-bg: #1e40af; /* Main blue for firm titles, section titles */
+            --firm-color: white;
+            --platform-bg: #dbeafe; /* Light blue for platform tags */
+            --platform-color: #1e40af;
+            --platform-border: #bfdbfe;
+            --section-title-independent-bg: #ffedd5; /* Orange/Yellow tint for Independent WM section title */
+            --section-title-independent-color: #9a3412; /* Darker orange for text */
+            --section-title-bank-bg: #dcfce7; /* Lighter Green tint for Bank-Led WM section title */
+            --section-title-bank-color: #166534; /* Darker green for text */
+
+            --text-main: #333;
+            --bg-light: #f8fafc; /* Slightly brighter background */
+            --card-shadow: rgba(0, 0, 0, 0.07);
+            --animation-stagger-section: 0.2s;
+            --animation-stagger-firm: 0.15s;
+            --animation-stagger-platform: 0.1s;
+            --connector-draw-duration: 0.3s;
+            --platform-appear-duration: 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .chart-main-container {
+            width: 100%;
+            max-width: 1300px; 
+        }
+
+        .main-heading {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--firm-bg);
+            text-align: center;
+            margin-bottom: 1rem; /* Reduced margin */
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInSlideUp 0.6s ease-out 0.2s forwards;
+        }
+        .sub-heading {
+            font-size: 1.1rem;
+            color: #4b5563;
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInSlideUp 0.6s ease-out 0.4s forwards;
+        }
+
+
+        .ecosystem-layout {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            justify-content: center; 
+        }
+
+        .wm-section {
+            flex: 1; 
+            min-width: 360px; /* Min width before stacking */
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInSlideUp var(--animation-stagger-section) ease-out forwards;
+        }
+
+        .wm-section.bank-led {
+            animation-delay: calc(0.7s + var(--animation-stagger-section) * 1);
+            border-top: 5px solid var(--section-title-bank-color);
+        }
+        .wm-section.independent-wm {
+            animation-delay: calc(0.7s + var(--animation-stagger-section) * 2);
+            border-top: 5px solid var(--section-title-independent-color);
+        }
+
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            display: block;
+        }
+        .section-title.bank-led-title {
+            background-color: var(--section-title-bank-bg);
+            color: var(--section-title-bank-color);
+        }
+        .section-title.independent-wm-title {
+            background-color: var(--section-title-independent-bg);
+            color: var(--section-title-independent-color);
+        }
+
+
+        .firm-card {
+            background-color: #fdfdff; 
+            border: 1px solid #eef2f7;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp var(--animation-stagger-firm) ease-out forwards;
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+
+        .firm-card:last-child {
+            margin-bottom: 0;
+        }
+        
+        .firm-card:hover {
+            transform: translateY(15px) scale(1.015);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .firm-title {
+            background-color: var(--firm-bg);
+            color: var(--firm-color);
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-15px);
+            animation: fadeInSlideLeft 0.4s ease-out forwards;
+        }
+
+        .platforms-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .platform-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            padding: 0.3rem 0;
+            opacity: 0;
+            animation: fadeInPlatformItem var(--platform-appear-duration) ease-out forwards;
+        }
+        .platform-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .platform-connector {
+            width: 0;
+            height: 2.5px;
+            background-color: var(--platform-border);
+            margin-right: 10px;
+            border-radius: 2px;
+            animation: drawConnector var(--connector-draw-duration) ease-out forwards;
+        }
+
+        .platform-name {
+            background-color: var(--platform-bg);
+            color: var(--platform-color);
+            font-weight: bold;
+            padding: 0.4rem 0.7rem;
+            border-radius: 4px;
+            border: 1px solid var(--platform-border);
+            font-size: 0.85rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: fadeInSlideLeft var(--platform-appear-duration) ease-out forwards;
+        }
+
+        /* Animations */
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInSlideLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInPlatformItem {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawConnector {
+            to {
+                width: 18px; 
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 820px) { /* Adjusted breakpoint */
+            .ecosystem-layout {
+                flex-direction: column; 
+            }
+            .wm-section {
+                min-width: 100%; 
+                margin-bottom: 2rem; /* Add margin when stacked */
+            }
+            .wm-section:last-child {
+                margin-bottom: 0;
+            }
+            .main-heading {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="chart-main-container">
+        <h1 class="main-heading">Wealth Management Servicing Technology Ecosystem</h1>
+        <p class="sub-heading">
+            An overview of key technology platforms enabling client servicing for leading Wealth Management firms in India, 
+            categorized by Bank-Led and Independent operations. Tech stacks are based on diagrammatic indications and public research.
+        </p>
+
+        <div class="ecosystem-layout">
+            <section class="wm-section bank-led">
+                <h2 class="section-title bank-led-title">Bank-Led Wealth Management</h2>
+                
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.2s);">HDFC Bank WM</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">HDFC Bank API Portal (Integration Hub)</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">NetBanking/MobileBanking (Wealth Section)</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">Salesforce Service Cloud (CRM)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.2s);">ICICI Wealth Management</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">ICICIdirect.com (Portfolio View)</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">ICICI Bank iWealth Portal/App</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">CRM & Servicing Backend (e.g., Oracle/SF)</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.2s);">Kotak Wealth Management</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">Salesforce Financial Services Cloud</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">Kotak Cherry (Client App)</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">Kotak Netcric (Advisor Portal)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.2s);">Axis Bank Burgundy</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">Axis Mobile App (Burgundy Features)</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">Burgundy Client Portal (Online)</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">Salesforce CRM (Underlying)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.2s);">SBI Wealth</h3>
+                     <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">SBI YONO (Wealth Management Module)</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">SBI Wealth Client Portal</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 5 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">Dedicated RM Support Tools</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.2s);">Standard Chartered WM</h3>
+                     <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">SC Online & Mobile (Wealth View)</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">Digital Advisory & Servicing Tools</span>
+                        </li>
+                         <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 1 + var(--animation-stagger-firm) * 6 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">"My RM" App Features</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="wm-section independent-wm">
+                <h2 class="section-title independent-wm-title">Independent Wealth Management</h2>
+                
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.2s);">Aditya Birla Capital</h3>
+                    <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">ABC Client Portal & Mobile App Suite</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">Salesforce (CRM & Client Management)</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 1 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">Digital Advisory Tools</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.2s);">Anand Rathi Wealth</h3>
+                     <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">AR Wealth App / Client Mobile App</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">Anand Rathi Online Servicing Portal</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 2 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">Proprietary Advisor Platform</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.2s);">Bajaj Capital</h3>
+                     <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">Bajaj Capital Client Portal & App</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">Advisor CRM & Financial Planning Tools</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 3 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">Digital Onboarding & eKYC</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="firm-card" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4);">
+                    <h3 class="firm-title" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.2s);">Edelweiss WM (Nuvama)</h3>
+                     <ul class="platforms-list">
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 1);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 1);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 1 + (var(--connector-draw-duration)*0.5));">Nuvama Digital Platform</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 2);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 2);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 2 + (var(--connector-draw-duration)*0.5));">Nuvama Markets App & Web Portal</span>
+                        </li>
+                        <li class="platform-item" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 3);">
+                            <span class="platform-connector" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 3);"></span>
+                            <span class="platform-name" style="animation-delay: calc(0.7s + var(--animation-stagger-section) * 2 + var(--animation-stagger-firm) * 4 + 0.4s + var(--animation-stagger-platform) * 3 + (var(--connector-draw-duration)*0.5));">Client Servicing & RM Tools</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

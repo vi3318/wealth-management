@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Management Tech Stacks: Innovations & Strategies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef2f9 0%, #d7e0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1.5rem;
+            color: #334155;
+        }
+
+        .main-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .main-title h1 {
+            color: #1e3a8a;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .main-title p {
+            color: #475569;
+            font-size: 1.15rem;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .navigation {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .nav-card {
+            background: white;
+            padding: 2.2rem 1.8rem;
+            border-radius: 18px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07);
+            border: 1px solid #d1d9e6;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-card h2 {
+            color: #1e3a8a;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .nav-card p {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .ecosystem-container {
+            background: white;
+            padding: 3.5rem;
+            border-radius: 22px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ecosystem-title {
+            text-align: center;
+            margin-bottom: 2.5rem; 
+            color: #1e3a8a;
+            font-size: 1.9rem;
+            font-weight: 600;
+        }
+
+        .ecosystem {
+            position: relative;
+            padding: 1rem 0; 
+            text-align: center; 
+        }
+
+        .ecosystem-image {
+            max-width: 100%; 
+            height: auto;   
+            display: block;  
+            margin: 0 auto;  
+            border-radius: 12px; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+            opacity: 0; 
+            animation: fadeIn 0.7s ease-out 0.3s forwards;
+        }
+        
+        .page-footer {
+            width: 100%;
+            max-width: 1200px; /* Aligns with other content blocks */
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #d1d9e6;
+            font-size: 0.9rem;
+            color: #64748b; /* A subtle text color from your palette */
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out 1.2s forwards; /* Delayed to appear last */
+        }
+
+        /* General fadeIn animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .navigation {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .main-title h1 { font-size: 2.4rem; }
+            .main-title p { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 2rem 1rem; }
+            .navigation {
+                grid-template-columns: 1fr;
+            }
+            .main-title h1 { font-size: 2rem; }
+            .main-title p { font-size: 1rem; }
+            .ecosystem-container { padding: 2.5rem 1rem; }
+            .ecosystem-title { font-size: 1.6rem; }
+             .ecosystem-image {
+                border-radius: 8px;
+                box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            }
+        }
+        @media (max-width: 480px) {
+             .main-title h1 { font-size: 1.8rem; }
+            .main-title p { font-size: 0.9rem; }
+             .nav-card h2 {font-size: 1.2rem;}
+             .nav-card p {font-size: 0.85rem;}
+             .ecosystem-container { padding: 2rem 0.5rem; }
+             .ecosystem-title { font-size: 1.4rem; margin-bottom: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-title">
+        <h1>Tech Driving Modern Wealth Management</h1>
+        <p>Exploring innovations in Data Analytics, Lead Generation, Marketing, and Servicing for leading Wealth Management firms.</p>
+    </div>
+
+    <div class="navigation">
+        <a href="wealth_data_analytics.html" class="nav-card">
+            <h2>Data + Analytics</h2>
+            <p>Leveraging data for sophisticated client insights, risk management, and alpha generation in wealth portfolios.</p>
+        </a>
+        <a href="lead_generation.html" class="nav-card">
+            <h2>Lead Generation</h2>
+            <p>Strategic technology for identifying, attracting, and nurturing high-net-worth prospects and referrals.</p>
+        </a>
+        <a href="wealth_marketing.html" class="nav-card">
+            <h2>Marketing</h2>
+            <p>Advanced automation and digital platforms for targeted communication and brand building with an affluent clientele.</p>
+        </a>
+        <a href="wealth_servicing.html" class="nav-card">
+            <h2>Servicing</h2>
+            <p>Comprehensive platforms delivering exceptional client service, robust portfolio reporting, and seamless digital interaction.</p>
+        </a>
+    </div>
+
+    <div class="ecosystem-container">
+        <h2 class="ecosystem-title">Wealth Management Tech Ecosystem Overview</h2>
+        <div class="ecosystem">
+            <img src="wealth_management_ecosystem.jpg" alt="Wealth Management Firm Ecosystem Diagram showing technology flows" class="ecosystem-image">
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        Research & Design by Vihaan Dharia
+    </footer>
+    
+</body>
+</html>

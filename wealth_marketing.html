@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Management: Firm Tiers & Marketing Tech Landscape</title>
+    <style>
+        :root {
+            --main-bg: #f8fafc; 
+            --card-bg: #ffffff;
+            --primary-blue: #1e40af;
+            --primary-blue-text: #ffffff;
+            --secondary-blue: #3b82f6; 
+            --light-blue-bg: #e0e7ff; 
+            --light-blue-text: #1e3a8a; 
+            --text-dark: #111827; 
+            --text-medium: #4b5569;
+            --border-color: #d1d5db; 
+            --category-block-bg: #f3f4f6; 
+            --shadow-light: rgba(0, 0, 0, 0.04);
+            --shadow-medium: rgba(0, 0, 0, 0.08);
+
+            --animation-duration-fast: 0.3s;
+            --animation-duration-medium: 0.5s;
+            --animation-duration-slow: 0.7s;
+            --animation-stagger-platform: 0.1s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-dark);
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeIn var(--animation-duration-slow) ease-out forwards;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .main-heading {
+            font-size: 2.4rem;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideInFromTop var(--animation-duration-medium) ease-out 0.3s forwards;
+        }
+
+        .layout-grid { display: flex; flex-wrap: wrap; gap: 2.5rem; }
+        .column { flex: 1; min-width: 320px; }
+        .column-firm-tiers { flex-basis: 30%; max-width: 420px; }
+        .column-marketing-stack { flex-basis: 65%; }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 3px solid var(--secondary-blue);
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-15px);
+            animation: slideInFromTop var(--animation-duration-medium) ease-out forwards;
+        }
+        .column-firm-tiers .section-title { animation-delay: 0.5s; }
+        .column-marketing-stack .section-title { animation-delay: 0.7s; }
+
+        /* Firm Tiers Styling */
+        .tier-section {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow-medium);
+            margin-bottom: 1.8rem;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: popIn var(--animation-duration-medium) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .tier-section:nth-of-type(1) { animation-delay: 0.9s; } /* Use nth-of-type for reliability */
+        .tier-section:nth-of-type(2) { animation-delay: 1.1s; }
+        .tier-section:nth-of-type(3) { animation-delay: 1.3s; }
+
+        .tier-title {
+            font-size: 1.25rem;
+            color: var(--primary-blue-text);
+            background-color: var(--primary-blue);
+            padding: 0.7rem 1.1rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .firm-list { list-style: none; }
+        .firm-list-item {
+            background-color: var(--light-blue-bg);
+            color: var(--light-blue-text);
+            padding: 0.6rem 0.9rem; margin-bottom: 0.6rem; border-radius: 6px;
+            font-size: 0.95rem; font-weight: 500;
+            transition: background-color var(--animation-duration-fast) ease, transform var(--animation-duration-fast) ease;
+        }
+        .firm-list-item:hover {
+            background-color: var(--secondary-blue);
+            color: var(--primary-blue-text);
+            transform: translateX(5px);
+        }
+        .firm-list-item:last-child { margin-bottom: 0; }
+
+        /* Marketing Tech Stack Styling - Enhanced for "Chart-Like" feel */
+        .tech-category {
+            background-color: var(--category-block-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 6px 18px var(--shadow-light);
+            margin-bottom: 2.5rem;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-25px) scale(0.98);
+            animation: slideInFromLeft var(--animation-duration-medium) ease-out forwards;
+        }
+        .tech-category:nth-of-type(1) { animation-delay: 1.0s; } /* Base delay for category block */
+        .tech-category:nth-of-type(2) { animation-delay: 1.2s; }
+        .tech-category:nth-of-type(3) { animation-delay: 1.4s; }
+
+        .tech-category-title-wrapper { /* Wrapper for title and its connector */
+            background-color: var(--primary-blue);
+            color: var(--primary-blue-text);
+            padding: 0.8rem 1.5rem;
+            border-top-left-radius: 11px;
+            border-top-right-radius: 11px;
+            position: relative;
+        }
+        .tech-category-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 0;
+        }
+
+        .tech-category-title-wrapper::after { /* Connector Line */
+            content: '';
+            position: absolute;
+            bottom: -15px; /* Projects 15px below the title wrapper */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 0; /* Initial height 0 */
+            background-color: var(--secondary-blue);
+            border-radius: 2px;
+            opacity: 0;
+            animation: growLineDown var(--animation-duration-fast) ease-out forwards;
+            /* Animation delay set inline in HTML for precision */
+        }
+        @keyframes growLineDown {
+            from { height: 0; opacity: 0; }
+            to { height: 15px; opacity: 1; }
+        }
+
+        .platform-grid-container {
+            padding: 1.5rem;
+            padding-top: 25px; /* Space for the 15px connector line + 10px gap */
+        }
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .platform-card {
+            background-color: var(--card-bg);
+            padding: 1.2rem; border-radius: 10px;
+            box-shadow: 0 4px 10px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform var(--animation-duration-fast) ease, box-shadow var(--animation-duration-fast) ease;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            animation: popInPlatform var(--animation-duration-medium) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            /* Animation delay set inline in HTML */
+        }
+        @keyframes popInPlatform {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .platform-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 7px 20px var(--shadow-medium);
+        }
+
+        .platform-name {
+            font-size: 1.1rem; color: var(--light-blue-text);
+            background-color: var(--light-blue-bg);
+            padding: 0.6rem 1rem; border-radius: 6px;
+            margin-bottom: 1rem; display: inline-block;
+            font-weight: 600;
+            border-left: 4px solid var(--secondary-blue);
+        }
+        .used-by-title {
+            font-size: 0.85rem; color: var(--text-medium);
+            margin-bottom: 0.4rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .used-by-list { list-style: none; font-size: 0.9rem; color: var(--text-dark); }
+        .used-by-list li { padding: 0.25rem 0; border-bottom: 1px dashed #e0e0e0; }
+        .used-by-list li:last-child { border-bottom: none; }
+
+        /* Animation Keyframes (re-stated for clarity if needed) */
+        @keyframes slideInFromTop { to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInFromLeft { to { opacity: 1; transform: translateX(0) scale(1); } }
+        @keyframes popIn {  to { opacity: 1; transform: scale(1); } }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .column-firm-tiers { flex-basis: 100%; max-width: 100%; margin-bottom: 2.5rem; }
+            .column-marketing-stack { flex-basis: 100%; }
+        }
+        @media (max-width: 576px) {
+            body { padding: 1rem; }
+            .main-heading { font-size: 1.8rem; margin-bottom: 2rem; }
+            .section-title { font-size: 1.3rem; }
+            .tier-title { font-size: 1.1rem; }
+            .tech-category-title-wrapper { padding: 0.7rem 1rem; }
+            .tech-category-title { font-size: 1.2rem; }
+            .platform-name { font-size: 1rem; }
+            .platform-grid { grid-template-columns: 1fr; }
+            .platform-grid-container { padding: 1.5rem 1rem 1rem 1rem; padding-top: 20px; }
+            .tech-category-title-wrapper::after { bottom: -12px; height: 12px;} /* Adjust connector for smaller screens */
+            @keyframes growLineDown { to { height: 12px; opacity: 1; } }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1 class="main-heading">Wealth Management: Firm Tiers & Marketing Tech Landscape</h1>
+
+        <div class="layout-grid">
+            <div class="column column-firm-tiers">
+                <h2 class="section-title">Firm Tiers in Indian Wealth Management</h2>
+                <div class="tier-section"> <h3 class="tier-title">Top Tier</h3>
+                    <ul class="firm-list">
+                        <li class="firm-list-item">HDFC Bank Wealth Management</li>
+                        <li class="firm-list-item">ICICI Wealth Management</li>
+                        <li class="firm-list-item">Kotak Wealth Management</li>
+                    </ul>
+                </div>
+                <div class="tier-section"> <h3 class="tier-title">Mid Tier</h3>
+                    <ul class="firm-list">
+                        <li class="firm-list-item">Axis Bank Burgundy</li>
+                        <li class="firm-list-item">Aditya Birla Capital</li>
+                        <li class="firm-list-item">Standard Chartered WM</li>
+                    </ul>
+                </div>
+                <div class="tier-section"> <h3 class="tier-title">Emerging Tier</h3>
+                    <ul class="firm-list">
+                        <li class="firm-list-item">SBI Wealth</li>
+                        <li class="firm-list-item">Anand Rathi Wealth</li>
+                        <li class="firm-list-item">Bajaj Capital</li>
+                        <li class="firm-list-item">Edelweiss WM (Nuvama)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column column-marketing-stack">
+                <h2 class="section-title">Key Marketing Technology Stacks</h2>
+
+                <div class="tech-category" style="animation-delay: 1.0s;">
+                    <div class="tech-category-title-wrapper" style="--connector-delay: 1.3s;"> <h3 class="tech-category-title">Marketing Automation</h3>
+                    </div>
+                    <div class="platform-grid-container">
+                        <div class="platform-grid">
+                            <div class="platform-card" style="animation-delay: calc(1.3s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 0);">
+                                <h4 class="platform-name">Marketo</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>HDFC Bank WM</li><li>ICICI WM</li></ul>
+                            </div>
+                            <div class="platform-card" style="animation-delay: calc(1.3s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 1);">
+                                <h4 class="platform-name">HubSpot</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>Anand Rathi Wealth</li><li>Bajaj Capital</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category" style="animation-delay: 1.2s;">
+                     <div class="tech-category-title-wrapper" style="--connector-delay: 1.5s;">
+                        <h3 class="tech-category-title">CRM & Analytics</h3>
+                    </div>
+                    <div class="platform-grid-container">
+                        <div class="platform-grid">
+                            <div class="platform-card" style="animation-delay: calc(1.5s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 0);">
+                                <h4 class="platform-name">Salesforce Marketing Cloud</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>Axis Bank Burgundy</li><li>Aditya Birla Capital</li></ul>
+                            </div>
+                            <div class="platform-card" style="animation-delay: calc(1.5s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 1);">
+                                <h4 class="platform-name">Salesforce FSC</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>Kotak WM</li><li>HDFC Bank WM</li><li>ICICI WM</li></ul>
+                            </div>
+                            <div class="platform-card" style="animation-delay: calc(1.5s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 2);">
+                                <h4 class="platform-name">Microsoft Dynamics</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>Edelweiss WM (Nuvama)</li><li>Kotak WM</li></ul>
+                            </div>
+                            <div class="platform-card" style="animation-delay: calc(1.5s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 3);">
+                                <h4 class="platform-name">Adobe Analytics</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>HDFC Bank WM</li><li>Standard Chartered WM</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category" style="animation-delay: 1.4s;">
+                    <div class="tech-category-title-wrapper" style="--connector-delay: 1.7s;">
+                        <h3 class="tech-category-title">Digital Marketing</h3>
+                    </div>
+                    <div class="platform-grid-container">
+                        <div class="platform-grid">
+                            <div class="platform-card" style="animation-delay: calc(1.7s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 0);">
+                                <h4 class="platform-name">Adobe Experience Cloud</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>HDFC Bank WM</li><li>Standard Chartered WM</li><li>ICICI WM</li></ul>
+                            </div>
+                            <div class="platform-card" style="animation-delay: calc(1.7s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 1);">
+                                <h4 class="platform-name">Google Marketing Platform</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>Kotak WM</li><li>SBI Wealth</li></ul>
+                            </div>
+                            <div class="platform-card" style="animation-delay: calc(1.7s + var(--connector-draw-duration) + var(--animation-stagger-platform) * 2);">
+                                <h4 class="platform-name">Optimizely</h4>
+                                <p class="used-by-title">Primarily Used By:</p>
+                                <ul class="used-by-list"><li>Bajaj Capital</li><li>Edelweiss WM (Nuvama)</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    // Script to set connector animation delays dynamically based on parent
+    // This ensures the connector line animation syncs better with its category title appearing
+    document.addEventListener('DOMContentLoaded', function() {
+        const techCategories = document.querySelectorAll('.tech-category');
+        techCategories.forEach(category => {
+            const titleWrapper = category.querySelector('.tech-category-title-wrapper');
+            if (titleWrapper) {
+                const connectorDelay = titleWrapper.style.getPropertyValue('--connector-delay');
+                const connectorPseudoElement = titleWrapper.style; // Access ::after through JS is tricky this way
+                                                                // Better approach is to have this delay also influence card appearance
+
+                // For this pure CSS version, the inline style for --connector-delay is a custom property
+                // The CSS for ::after needs to use it: animation-delay: var(--connector-delay, 2s); /* 2s is a fallback */
+                // However, ::after cannot directly inherit custom properties for animation-delay in all cases easily without complex selectors
+                // The provided HTML now sets direct inline animation-delay for platform cards based on these --connector-delay values.
+                // The CSS for ::after will use `animation-delay: inherit` and the parent wrapper will have the actual delay if needed.
+                // For precision, I added the explicit animation-delay calculation for platform cards in the HTML's style attribute.
+                // The CSS `animation-delay: inherit;` on `::after` isn't standard for inheriting the numeric value for delay.
+                // Let's make sure the CSS `::after` has a base delay that works with the category's delay.
+                // The HTML structure for platform-card animation delays already correctly calculates this.
+                // The `::after` animation-delay is now set in CSS using `nth-of-type` on `.tech-category` for simplicity.
+            }
+        });
+    });
+</script>
+</body>
+</html>
